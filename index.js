@@ -26,3 +26,4 @@ const averageClassB = divide(note.reduce(sum), note.length);
 
 console.log(`This Average B is: ${averageClassB}`);
 
+o

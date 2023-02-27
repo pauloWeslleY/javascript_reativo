@@ -4,9 +4,8 @@ const path = require('path');
 function readDirectory(paths) {
 	return new Promise((resolve, reject) => {
 		try {
-			const files = fs.readdirSync(paths);
-			const filesComplete = files.map(file => path.join(paths, file));
-			resolve(filesComplete);
+			const files = fs.readdirSync(paths).map(file => path.join(paths, file));
+			resolve(files);
 		} catch (err) {
 			reject(err);
 		}
@@ -80,7 +79,7 @@ function orderForAtributesNumeric(attr, order = 'orderCrescent') {
 		const orderCrescent = (o1, o2) => o1[attr] - o2[attr];
 		const orderDecrescent = (o1, o2) => o2[attr] - o1[attr];
 
-		return arr.sort(order === 'orderCrescent' ? orderCrescent : orderDecrescent);
+		return [...arr].sort(order === 'orderCrescent' ? orderCrescent : orderDecrescent);
 	};
 }
 
