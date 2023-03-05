@@ -93,7 +93,24 @@ function separateTextFor(symbol) {
 	};
 }
 
+function composition(...fns) {
+   return function (value) {
+      return fns.reduce(async (acc, fn) => {
+         if (Promise.resolve(acc) === acc) {
+
+            return fn(await acc)
+
+         } else {
+
+				return fn(acc)
+
+         }
+      }, value)
+   }
+}
+
 module.exports = {
+	composition,
 	readDirectory,
 	readingOnFile,
 	readingFiles,

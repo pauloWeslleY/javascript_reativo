@@ -5,20 +5,24 @@ const paths = path.join(__dirname, 'legendas');
 
 const symbols = ['.', '?', '-', ',', '"', '♪', '_', '<i>', '</i>', '\r', '[', ']', '(', ')'];
 
+const readPaths = fns.composition(
+	fns.readDirectory,
+	fns.elementsFinishedWith('.srt'),
+	fns.readingFiles,
+	fns.contentTogether,
+	fns.separateTextFor('\n'),
+	fns.removeIfEmpty,
+	fns.removeIfInclude('-->'),
+	fns.removeIfJustNumber,
+	fns.removeSymbols(symbols),
+	fns.contentTogether,
+	fns.separateTextFor(' '),
+   fns.removeIfEmpty,
+   fns.removeIfJustNumber,
+	fns.groupWords,
+	fns.orderForAtributesNumeric('quantity', 'orderDecrescent'),
+)
 
-fns.readDirectory(paths)
-	.then(fns.elementsFinishedWith('.srt'))
-	.then(fns.readingFiles)
-	.then(fns.contentTogether)
-	.then(fns.separateTextFor('\n'))
-	.then(fns.removeIfEmpty)
-	.then(fns.removeIfInclude('-->'))
-	.then(fns.removeIfJustNumber)
-	.then(fns.removeSymbols(symbols))
-	.then(fns.contentTogether)
-	.then(fns.separateTextFor(' '))
-   .then(fns.removeIfEmpty)
-   .then(fns.removeIfJustNumber)
-	.then(fns.groupWords)
-	.then(fns.orderForAtributesNumeric('quantity', 'orderDecrescent'))
-	.then(console.log);
+readPaths(paths).then(console.log)
+
+
