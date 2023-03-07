@@ -28,7 +28,10 @@ function TypeSave(value) {
             const newValue = fn(this.value)
             return TypeSave(newValue)
          }
-      }
+      },
+      flatMap(fn) {
+         return this.map(fn).value
+      },
    }
 }
 
@@ -37,8 +40,8 @@ const origin = 'This is text!'
 const result = TypeSave(origin)
    .map(text => text.toUpperCase())
    .map(text => `${text}!!`)
-   .map(text => text.split("").join(" "))
+   .flatMap(text => text.split("").join(" "))
 
 
-console.log(origin, result.value)
+console.log(origin, result)
 
