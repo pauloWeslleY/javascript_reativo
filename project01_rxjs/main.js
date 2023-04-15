@@ -1,7 +1,7 @@
 const path = require('path');
 const fns = require('./utils');
 const _ = require('lodash');
-const { toArray, map, groupBy, mergeMap, reduce } = require('rxjs/operators');
+const { toArray, map, groupBy, mergeMap } = require('rxjs/operators');
 
 const paths = path.join(__dirname, 'legendas');
 
